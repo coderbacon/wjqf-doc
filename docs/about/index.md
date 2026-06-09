@@ -2,7 +2,7 @@
 
 ## 文档简介
 
-吴江庆丰在线文档库是公司内部的知识管理平台，旨在为员工提供统一、便捷的文档查阅入口。
+&nbsp;&nbsp;&nbsp;&nbsp;吴江庆丰在线文档库是公司内部的知识管理平台，旨在为员工提供统一、便捷的文档查阅入口。
 
 ## 覆盖范围
 
@@ -21,5 +21,6 @@
 
 ## 更新与维护
 
-本文档库由 IT 部门维护，内容持续更新中。如有疑问或建议，请联系管理员。，如果有任何问题或建议，请及时反馈。  
-或者可以发送邮件到：[it_wjqflexus@qfcars.com](mailto:it_wjqflexus@qfcars.com)
+&nbsp;&nbsp;&nbsp;&nbsp;本文档库由 IT 部门维护，内容持续更新中。如有疑问或建议，请联系管理员。，如果有任何问题或建议，请及时反馈。
+
+&nbsp;&nbsp;&nbsp;&nbsp;或者可以发送邮件到：[it_wjqflexus@qfcars.com](mailto:it_wjqflexus@qfcars.com)

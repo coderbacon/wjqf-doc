@@ -19,23 +19,17 @@ export default defineConfig({
 					light: "/logo-black.png",
 					dark: "/logo-white.png",
 				},
-				nav: [
-					{ text: "首页", link: "/" },
-				],
+				nav: [{ text: "首页", link: "/" }],
 				sidebar: [
 					{
 						text: "简介",
 						collapsed: true,
-						items: [
-							{ text: "庆丰文档是什么？", link: "/about/" },
-						],
+						items: [{ text: "关于庆丰文档", link: "/about/" }],
 					},
 					{
 						text: "共享服务器",
 						collapsed: true,
-						items: [
-							{ text: "群晖 NAS", link: "/synology/" },
-						],
+						items: [{ text: "群晖 NAS", link: "/synology/" }],
 					},
 					{
 						text: "金蝶系统",
@@ -56,9 +50,7 @@ export default defineConfig({
 					{
 						text: "道闸系统",
 						collapsed: true,
-						items: [
-							{ text: "使用说明", link: "/gate/" },
-						],
+						items: [{ text: "使用说明", link: "/gate/" }],
 					},
 				],
 				// 中文页面元信息
@@ -92,21 +84,15 @@ export default defineConfig({
 					light: "/logo-black.png",
 					dark: "/logo-white.png",
 				},
-				nav: [
-					{ text: "Home", link: "/en/" },
-				],
+				nav: [{ text: "Home", link: "/en/" }],
 				sidebar: [
 					{
 						text: "About",
-						items: [
-							{ text: "Overview", link: "/en/about/" },
-						],
+						items: [{ text: "Overview", link: "/en/about/" }],
 					},
 					{
 						text: "Shared Server",
-						items: [
-							{ text: "Synology NAS", link: "/en/synoloy/" },
-						],
+						items: [{ text: "Synology NAS", link: "/en/synoloy/" }],
 					},
 					{
 						text: "Kingdee System",
@@ -117,9 +103,7 @@ export default defineConfig({
 					},
 					{
 						text: "DMS System",
-						items: [
-							{ text: "User Guide", link: "/en/dms/" },
-						],
+						items: [{ text: "User Guide", link: "/en/dms/" }],
 					},
 				],
 				// English page meta

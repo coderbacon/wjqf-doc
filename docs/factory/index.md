@@ -2,4 +2,4 @@
 
 ## 包含系统
 
-- DMS 系统
+- [**DMS系统**](/factory/dms.md)
