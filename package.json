@@ -1,7 +1,14 @@
 {
+  "name": "wjqf-doc",
+  "version": "1.0.1",
+  "private": true,
+  "description": "吴江庆丰在线文档库 - 内部知识管理平台",
+  "author": "CoderBacon",
+  "license": "UNLICENSED",
   "scripts": {
     "docs:dev": "vitepress dev",
-    "docs:build": "vitepress build",
+    "docs:clean": "node -e \"try{require('fs').rmSync('.vitepress/dist',{recursive:true,force:true})}catch(e){};try{require('fs').rmSync('.vitepress/cache',{recursive:true,force:true})}catch(e){};try{require('fs').unlinkSync('wjqf-doc.zip')}catch(e){}\"",
+    "docs:build": "vitepress build && node scripts/zip.cjs",
     "docs:preview": "vitepress preview"
   },
   "devDependencies": {

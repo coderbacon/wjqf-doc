@@ -2,8 +2,8 @@ import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-	title: "WjqfDoc",
-	description: "一个 VitePress 文档站点 / A VitePress Documentation Site",
+	title: "庆丰文档",
+	description: "这里有你想要的一切",
 	srcDir: "./docs",
 
 	// ==================== 国际化配置 ====================
@@ -24,28 +24,40 @@ export default defineConfig({
 				],
 				sidebar: [
 					{
-						text: "关于",
+						text: "简介",
+						collapsed: true,
 						items: [
-							{ text: "简介", link: "/about/" },
+							{ text: "庆丰文档是什么？", link: "/about/" },
 						],
 					},
 					{
 						text: "共享服务器",
+						collapsed: true,
 						items: [
-							{ text: "群晖 NAS", link: "/synoloy/" },
+							{ text: "群晖 NAS", link: "/synology/" },
 						],
 					},
 					{
 						text: "金蝶系统",
+						collapsed: true,
 						items: [
 							{ text: "注意", link: "/kingdee/notice/" },
 							{ text: "操作手册", link: "/kingdee/manuals/" },
 						],
 					},
 					{
-						text: "DMS 系统",
+						text: "厂家系统",
+						collapsed: true,
 						items: [
-							{ text: "使用说明", link: "/dms/" },
+							{ text: "简介", link: "/factory/" },
+							{ text: "DMS系统", link: "/factory/dms.md" },
+						],
+					},
+					{
+						text: "道闸系统",
+						collapsed: true,
+						items: [
+							{ text: "使用说明", link: "/gate/" },
 						],
 					},
 				],
