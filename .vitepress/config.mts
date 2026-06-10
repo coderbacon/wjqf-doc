@@ -19,29 +19,38 @@ export default defineConfig({
 					light: "/logo-black.png",
 					dark: "/logo-white.png",
 				},
-				nav: [{ text: "首页", link: "/" }],
+				nav: [
+					{ text: "首页", link: "/" },
+					{
+						text: "系统文档",
+						items: [
+							{ text: "关于庆丰文档", link: "/about/" },
+							{ text: "共享服务器", link: "/synology/" },
+							{ text: "集团系统", link: "/group/kingdee/" },
+							{ text: "厂家系统", link: "/factory/" },
+							{ text: "道闸系统", link: "/gate/" },
+						],
+					},
+				],
 				sidebar: [
 					{
 						text: "简介",
-						collapsed: true,
+						collapsed: false,
 						items: [{ text: "关于庆丰文档", link: "/about/" }],
 					},
 					{
 						text: "共享服务器",
-						collapsed: true,
+						collapsed: false,
 						items: [{ text: "群晖 NAS", link: "/synology/" }],
 					},
 					{
-						text: "金蝶系统",
-						collapsed: true,
-						items: [
-							{ text: "注意", link: "/kingdee/notice/" },
-							{ text: "操作手册", link: "/kingdee/manuals/" },
-						],
+						text: "集团系统",
+						collapsed: false,
+						items: [{ text: "金蝶系统", link: "/group/kingdee/" }],
 					},
 					{
 						text: "厂家系统",
-						collapsed: true,
+						collapsed: false,
 						items: [
 							{ text: "简介", link: "/factory/" },
 							{ text: "DMS系统", link: "/factory/dms.md" },
@@ -49,14 +58,14 @@ export default defineConfig({
 					},
 					{
 						text: "道闸系统",
-						collapsed: true,
+						collapsed: false,
 						items: [{ text: "使用说明", link: "/gate/" }],
 					},
 				],
 				// 中文页面元信息
 
 				outline: {
-					label: "页面导航",
+					label: "目录",
 				},
 				lastUpdated: {
 					text: "最后更新于",

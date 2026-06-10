@@ -15,7 +15,7 @@ features:
     link: /synology/
   - title: 金蝶系统
     details: 财务软件，用于管理公司财务数据。
-    link: /kingdee/
+    link: /group/kingdee/
   - title: 厂家系统
     details: 由厂家提供，主要用于公司业务层面，比如客户车辆维修保养订单等等。
     link: /factory/
