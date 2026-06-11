@@ -8,18 +8,18 @@ hero:
   actions:
     - theme: brand
       text: 开始使用
-      link: /about/
+      link: /sysdoc/about/
 features:
   - title: 共享服务器
     details: 由群晖Nas提供，拥有完整权限管理的文件存储共享服务。
-    link: /synology/
+    link: /sysdoc/synology/
   - title: 金蝶系统
     details: 财务软件，用于管理公司财务数据。
-    link: /group/kingdee/
+    link: /sysdoc/group/kingdee/
   - title: 厂家系统
     details: 由厂家提供，主要用于公司业务层面，比如客户车辆维修保养订单等等。
-    link: /factory/
+    link: /sysdoc/factory/
   - title: 道闸系统
     details: 管理车辆进出，确保安全和效率。
-    link: /gate/
+    link: /sysdoc/gate/
 ---
