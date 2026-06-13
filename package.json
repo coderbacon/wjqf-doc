@@ -8,8 +8,10 @@
   "scripts": {
     "docs:dev": "vitepress dev",
     "docs:clean": "node -e \"try{require('fs').rmSync('.vitepress/dist',{recursive:true,force:true})}catch(e){};try{require('fs').rmSync('.vitepress/cache',{recursive:true,force:true})}catch(e){};try{require('fs').unlinkSync('wjqf-doc.zip')}catch(e){}\"",
-    "docs:build": "vitepress build && node scripts/zip.cjs",
-    "docs:preview": "vitepress preview"
+    "docs:build": "npm run docs:clean && vitepress build && node scripts/zip.cjs",
+    "docs:preview": "vitepress preview",
+    "deploy": "npm run docs:clean && vitepress build && node scripts/deploy.cjs",
+    "deploy:only": "node scripts/deploy.cjs"
   },
   "devDependencies": {
     "vitepress": "^2.0.0-alpha.17"

@@ -4,3 +4,6 @@ node_modules/
 .DS_Store
 *.log
 *.zip
+
+# 部署配置（含服务器敏感信息）
+.env.deploy
