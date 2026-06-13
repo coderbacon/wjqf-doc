@@ -21,29 +21,37 @@ export default defineConfig({
         },
         nav: [
           { text: "首页", link: "/" },
+          { text: "关于", link: "/about/" },
           {
             text: "系统文档",
             items: [
-              { text: "关于庆丰文档", link: "/sysdoc/about/" },
-              { text: "共享服务器", link: "/sysdoc/synology/" },
+              { text: "公司系统", link: "/sysdoc/synology/" },
               { text: "集团系统", link: "/sysdoc/group/kingdee/" },
-              { text: "厂家系统", link: "/sysdoc/factory/" },
-              { text: "道闸系统", link: "/sysdoc/gate/" },
+              { text: "厂家系统", link: "/sysdoc/factory/dms.md" },
             ],
           },
-          { text: "公司章程", link: "/" },
+          {
+            text: "行政管理",
+            link: "/admin/expense/",
+          },
         ],
         sidebar: {
+          "/": [
+            {
+              text: "关于庆丰",
+              link: "/about/",
+            },
+          ],
           "/sysdoc/": [
             {
-              text: "简介",
+              text: "公司系统",
               collapsed: false,
-              items: [{ text: "关于庆丰文档", link: "/sysdoc/about/" }],
-            },
-            {
-              text: "共享服务器",
-              collapsed: false,
-              items: [{ text: "群晖 NAS", link: "/sysdoc/synology/" }],
+              items: [
+                { text: "文件共享", link: "/sysdoc/synology/" },
+                { text: "道闸系统", link: "/sysdoc/gate/" },
+                { text: "智柒钣喷", link: "/sysdoc/to7/" },
+                { text: "虚拟平台", link: "/sysdoc/pve/" },
+              ],
             },
             {
               text: "集团系统",
@@ -53,15 +61,19 @@ export default defineConfig({
             {
               text: "厂家系统",
               collapsed: false,
-              items: [
-                { text: "简介", link: "/sysdoc/factory/" },
-                { text: "DMS系统", link: "/sysdoc/factory/dms.md" },
-              ],
+              items: [{ text: "DMS系统", link: "/sysdoc/factory/dms.md" }],
             },
+          ],
+          "/admin/": [
             {
-              text: "道闸系统",
+              text: "行政管理",
               collapsed: false,
-              items: [{ text: "使用说明", link: "/sysdoc/gate/" }],
+              items: [
+                {
+                  text: "费用报销",
+                  link: "/admin/expense/",
+                },
+              ],
             },
           ],
         },

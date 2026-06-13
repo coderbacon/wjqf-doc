@@ -1,5 +1,4 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
@@ -8,9 +7,9 @@ hero:
   actions:
     - theme: brand
       text: 开始使用
-      link: /sysdoc/about/
+      link: /about/
 features:
-  - title: 共享服务器
+  - title: 文件共享
     details: 由群晖Nas提供，拥有完整权限管理的文件存储共享服务。
     link: /sysdoc/synology/
   - title: 金蝶系统
@@ -18,8 +17,5 @@ features:
     link: /sysdoc/group/kingdee/
   - title: 厂家系统
     details: 由厂家提供，主要用于公司业务层面，比如客户车辆维修保养订单等等。
-    link: /sysdoc/factory/
-  - title: 道闸系统
-    details: 管理车辆进出，确保安全和效率。
-    link: /sysdoc/gate/
+    link: /sysdoc/factory/dms.md
 ---

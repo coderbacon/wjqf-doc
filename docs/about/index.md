@@ -6,10 +6,15 @@
 
 ## 覆盖范围
 
-- [**共享服务器**](/sysdoc/synology/)：群晖 NAS 的使用指南和常见问题
-- [**金蝶系统**](/sysdoc/group/kingdee/)：财务系统的注意事项和操作手册
-- [**厂家系统**](/sysdoc/factory/)：厂家系统的使用说明
-- [**道闸系统**](/sysdoc/gate/)：道闸系统的使用说明
+- **公司系统**：
+  - [道闸系统](/sysdoc/gate/)：道闸系统的使用说明
+  - [共享服务器](/sysdoc/synology/)：群晖 NAS 的使用指南和常见问题
+  - [智柒钣喷管理](/sysdoc/to7/)：用于钣金喷漆排期的系统
+  - [PVE虚拟服务器](/sysdoc/pve/)：PVE虚拟服务器使用指南和常见问题
+- **集团系统**：
+  - [金蝶系统](/sysdoc/group/kingdee/)：财务系统的注意事项和操作手册
+- **厂家系统**：
+  - [DMS系统](/sysdoc/factory/dms.md)：厂家DMS系统的首次登录和常见问题
 
 ## 使用方式
 
