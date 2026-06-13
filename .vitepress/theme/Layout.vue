@@ -47,8 +47,6 @@ function isInsideLink(img: HTMLImageElement): boolean {
  * 为文档中的图片绑定点击预览事件
  */
 function bindImages(container: HTMLElement) {
-  if (!previewRef.value) return
-
   const images = container.querySelectorAll<HTMLImageElement>(
     '.vp-doc img, .content-container img, main img, article img'
   )
