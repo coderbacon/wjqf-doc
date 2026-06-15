@@ -92,14 +92,20 @@
 
 :root {
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: -webkit-linear-gradient(
-    120deg,
-    #bd34fe 30%,
-    #41d1ff
-  );
+  --vp-home-hero-image-filter: blur(44px);
+  /* Hero 标题渐变色和品牌色由 ColorThemeSwitcher 动态管理 */
+}
 
-  /* 首页 Features 图标统一尺寸（参考 VitePress 官方 48×48） */
-  --vp-home-feature-icon-size: 48px;
+@media (min-width: 640px) {
+  :root {
+    --vp-home-hero-image-filter: blur(56px);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --vp-home-hero-image-filter: blur(68px);
+  }
 }
 
 /* 统一 Features 图标尺寸 */
@@ -107,20 +113,6 @@
   width: 48px;
   height: 48px;
   object-fit: contain;
-}
-
-  --vp-home-hero-image-background-image: linear-gradient(
-    -45deg,
-    #bd34fe 50%,
-    #47caff 50%
-  );
-  --vp-home-hero-image-filter: blur(44px);
-}
-
-@media (min-width: 640px) {
-  :root {
-    --vp-home-hero-image-filter: blur(56px);
-  }
 }
 
 @media (min-width: 960px) {

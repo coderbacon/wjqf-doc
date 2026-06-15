@@ -7,12 +7,17 @@
 <template>
   <DefaultTheme.Layout />
   <ImagePreview ref="previewRef" />
+  <!-- 主题色切换按钮：注入到导航栏控件区域 -->
+  <Teleport to=".VPNavBarAppearance">
+    <ColorThemeSwitcher />
+  </Teleport>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, nextTick, provide } from 'vue'
 import DefaultTheme from 'vitepress/theme'
 import ImagePreview from './components/ImagePreview.vue'
+import ColorThemeSwitcher from './components/ColorThemeSwitcher.vue'
 import { KEY, type ImageViewerAPI } from './composables/useImageViewer'
 
 const previewRef = ref<InstanceType<typeof ImagePreview> | null>(null)

@@ -8,6 +8,10 @@ hero:
     - theme: brand
       text: 开始使用
       link: /about/
+  image:
+    src: /Lexus Logo_Special_ForSignage_3D_2510.png
+    # dark: /logo-white.png
+    # light: /logo-black.png
 features:
   - title: 文件共享
     details: 由群晖Nas提供，拥有完整权限管理的文件存储共享服务。
