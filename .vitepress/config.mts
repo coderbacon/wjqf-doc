@@ -50,7 +50,6 @@ export default defineConfig({
                 { text: "文件共享", link: "/sysdoc/synology/" },
                 { text: "道闸系统", link: "/sysdoc/gate/" },
                 { text: "智柒钣喷", link: "/sysdoc/to7/" },
-                { text: "虚拟平台", link: "/sysdoc/pve/" },
               ],
             },
             {
