@@ -77,7 +77,10 @@ export default defineConfig({
           ],
         },
         // 中文页面元信息
-
+        docFooter: {
+          prev: "上一篇",
+          next: "下一篇",
+        },
         outline: {
           label: "目录",
           level: [2, 3],

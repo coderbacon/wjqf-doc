@@ -51,29 +51,38 @@ function isInsideLink(img: HTMLImageElement): boolean {
 /**
  * 为文档中的图片绑定点击预览事件
  */
+function bindImage(img: HTMLImageElement) {
+  if (boundImages.has(img)) return
+  if (isInsideLink(img)) return
+  if (img.src.startsWith('data:')) return
+  if (img.classList.contains('no-preview')) return
+
+  boundImages.add(img)
+
+  img.style.cursor = 'zoom-in'
+  img.title = img.title || '点击查看大图'
+
+  img.addEventListener('click', () => {
+    const src = img.getAttribute('src') || img.currentSrc
+    const alt = img.getAttribute('alt') || ''
+    if (src && previewRef.value) {
+      previewRef.value.open(src, alt)
+    }
+  })
+}
+
 function bindImages(container: HTMLElement) {
   const images = container.querySelectorAll<HTMLImageElement>(
     '.vp-doc img, .content-container img, main img, article img'
   )
   images.forEach((img) => {
-    if (boundImages.has(img)) return
-    if (isInsideLink(img)) return
-    if (img.naturalWidth < 20 || img.naturalHeight < 20) return
-    if (img.src.startsWith('data:')) return
-    if (img.classList.contains('no-preview')) return
-
-    boundImages.add(img)
-
-    img.style.cursor = 'zoom-in'
-    img.title = img.title || '点击查看大图'
-
-    img.addEventListener('click', () => {
-      const src = img.getAttribute('src') || img.currentSrc
-      const alt = img.getAttribute('alt') || ''
-      if (src && previewRef.value) {
-        previewRef.value.open(src, alt)
-      }
-    })
+    // 图片已加载完成：直接绑定
+    if (img.complete && img.naturalWidth > 0) {
+      bindImage(img)
+    } else {
+      // 图片尚未加载：监听 load 事件，加载后再绑定
+      img.addEventListener('load', () => bindImage(img), { once: true })
+    }
   })
 }
 
