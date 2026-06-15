@@ -93,7 +93,9 @@
 :root {
   --vp-home-hero-name-color: transparent;
   --vp-home-hero-image-filter: blur(44px);
-  /* Hero 标题渐变色和品牌色由 ColorThemeSwitcher 动态管理 */
+  /* 默认配色（首次访问 / JS 加载前），由 ColorThemeSwitcher 动态覆盖 */
+  --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #1e3a5f 30%, #3b82f6);
+  --vp-home-hero-image-background-image: linear-gradient(-45deg, #1e3a5f 50%, #3b82f6 50%);
 }
 
 @media (min-width: 640px) {

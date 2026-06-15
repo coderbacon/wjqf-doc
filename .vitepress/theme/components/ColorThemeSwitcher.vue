@@ -25,7 +25,7 @@ const presets: ThemePreset[] = [
   {
     key: 'default',
     label: '默认',
-    desc: 'VitePress 原生',
+    desc: '原生',
     nameGradient: '120deg, #bd34fe 30%, #41d1ff',
     imageBg: '-45deg, #bd34fe 50%, #47caff 50%',
     brand1: 'var(--vp-c-indigo-1)',
@@ -152,12 +152,11 @@ function select(key: string) {
   openRef.value = false
 }
 
-// 初始化：从 localStorage 恢复
+// 初始化：从 localStorage 恢复，首次访问用默认配色
 onMounted(() => {
   const saved = localStorage.getItem(STORAGE_KEY)
-  if (saved && presets.some(p => p.key === saved)) {
-    applyTheme(saved)
-  }
+  const key = (saved && presets.some(p => p.key === saved)) ? saved : 'default'
+  applyTheme(key)
 })
 
 // 点击外部关闭
