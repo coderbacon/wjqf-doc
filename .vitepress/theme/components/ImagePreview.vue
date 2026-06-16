@@ -78,6 +78,7 @@
         <!-- 图片容器 -->
         <div
           class="ip-stage"
+          @click.self="handleClose"
           @mousedown="handleDragStart"
           @mousemove="handleDragMove"
           @mouseup="handleDragEnd"

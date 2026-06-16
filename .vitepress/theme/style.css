@@ -4,8 +4,13 @@
  */
 
 /* ========== 修复 VitePress v2 alpha 水合不匹配导致 footer 隐藏的问题 ========== */
-.VPDocFooter {
+/* .VPDocFooter {
   display: block !important;
+} */
+
+/* ========== 全局平滑滚动（锚点跳转动画） ========== */
+html {
+  scroll-behavior: smooth;
 }
 
 /**

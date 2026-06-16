@@ -34,6 +34,7 @@ export default defineConfig({
             text: "行政管理",
             link: "/admin/expense/",
           },
+          { text: "IT环境", link: "/it-env/network/" },
         ],
         sidebar: {
           "/": [
@@ -49,7 +50,6 @@ export default defineConfig({
               items: [
                 { text: "文件共享", link: "/sysdoc/synology/" },
                 { text: "道闸系统", link: "/sysdoc/gate/" },
-                { text: "智柒钣喷", link: "/sysdoc/to7/" },
               ],
             },
             {
@@ -73,6 +73,13 @@ export default defineConfig({
                   link: "/admin/expense/",
                 },
               ],
+            },
+          ],
+          "/it-env/": [
+            {
+              text: "IT环境",
+              collapsed: false,
+              items: [{ text: "网络环境", link: "/it-env/network/" }],
             },
           ],
         },
@@ -179,6 +186,7 @@ export default defineConfig({
         },
       },
     },
+    
   },
 
   // ==================== Markdown 配置 ====================
