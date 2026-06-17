@@ -1,13 +1,25 @@
 {
-    "cSpell.words": [
-        "kingdee",
-        "minisearch",
-        "Qingfeng",
-        "synoloy",
-        "sysdoc",
-        "vitepress",
-        "Wjqf",
-        "WJQFAUTO",
-        "Wujiang"
-    ]
+  "cSpell.words": [
+    "kingdee",
+    "LKSS",
+    "minisearch",
+    "Qingfeng",
+    "SDWAN",
+    "synoloy",
+    "sysdoc",
+    "vitepress",
+    "Wjqf",
+    "WJQFAUTO",
+    "Wujiang"
+  ],
+  // ==================== 图片粘贴配置 ====================
+  // VS Code 内置 Markdown 图片粘贴：保存到当前文档同级 images/ 目录
+  "markdown.copyFiles.destination": {
+    "/**/*": "${documentDirName}/images/"
+  },
+  // Paste Image 扩展（mushan.vscode-paste-image）备用配置
+  "pasteImage.path": "${currentFileDir}/images/",
+  "pasteImage.prefix": "./",
+  // 时间戳命名，避免覆盖：如 2026-06-17-14-30-45.png
+  "pasteImage.defaultName": "Y-MM-DD-HH-mm-ss"
 }
