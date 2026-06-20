@@ -11,6 +11,7 @@
  */
 import { ref } from 'vue'
 import { useData } from 'vitepress'
+import { sha256 } from '../utils/sha256'
 
 const SESSION_KEY = 'doc-pass-unlocked'
 
@@ -25,20 +26,36 @@ if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(SESSION_KEY)
   unlockedRef.value = true
 }
 
+/**
+ * 计算 SHA-256 哈希
+ * 优先使用 crypto.subtle（HTTPS / localhost），HTTP 环境降级为纯 JS 实现
+ */
+async function hashPassword(input: string): Promise<string> {
+  if (typeof crypto !== 'undefined' && crypto.subtle) {
+    const encoder = new TextEncoder()
+    const data = encoder.encode(input)
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+    return Array.from(new Uint8Array(hashBuffer))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('')
+  }
+  // HTTP 环境降级：纯 JavaScript SHA-256
+  return sha256(input)
+}
+
 async function verifyPassword(input: string) {
-  // 将输入转为 MD5 与 frontmatter 中的哈希比对
-  const encoder = new TextEncoder()
-  const data = encoder.encode(input)
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
-  const hashHex = Array.from(new Uint8Array(hashBuffer))
-    .map(b => b.toString(16).padStart(2, '0'))
-    .join('')
-  
-  if (hashHex === frontmatter.value.password) {
-    unlockedRef.value = true
-    sessionStorage.setItem(SESSION_KEY, '1')
-    errorRef.value = false
-  } else {
+  try {
+    const hashHex = await hashPassword(input)
+
+    if (hashHex === frontmatter.value.password) {
+      unlockedRef.value = true
+      sessionStorage.setItem(SESSION_KEY, '1')
+      errorRef.value = false
+    } else {
+      errorRef.value = true
+    }
+  } catch {
+    // 哈希计算异常（如浏览器不支持）也提示错误
     errorRef.value = true
   }
 }
