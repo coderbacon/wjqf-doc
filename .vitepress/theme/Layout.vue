@@ -23,6 +23,7 @@ import ImagePreview from './components/ImagePreview.vue'
 import ColorThemeSwitcher from './components/ColorThemeSwitcher.vue'
 import BackToTop from './components/BackToTop.vue'
 import { KEY, type ImageViewerAPI } from './composables/useImageViewer'
+import { useAnchorScrollFix } from './composables/useAnchorScrollFix'
 
 const { isDark } = useData()
 const previewRef = ref<InstanceType<typeof ImagePreview> | null>(null)
@@ -36,6 +37,9 @@ provide<ImageViewerAPI>(KEY, {
     previewRef.value?.close()
   },
 })
+
+// 锚点滚动修正（修复 VitePress 2.0 alpha 跨页面中文锚点跳转失效）
+useAnchorScrollFix()
 
 // 已绑定的图片集合（避免重复绑定）
 const boundImages = new WeakSet<HTMLImageElement>()
@@ -151,7 +155,8 @@ function handleThemeToggle(e: MouseEvent) {
  * 使用 MutationObserver 确保 Vue 渲染后仍能正确绑定
  */
 function hookThemeButtons() {
-  document.querySelectorAll('button.VPSwitchAppearance').forEach((btn) => {
+  document.querySelectorAll('button.VPSwitchAppearance').forEach((el) => {
+    const btn = el as HTMLElement
     if ((btn as any).__vtHooked) return
     ;(btn as any).__vtHooked = true
     // capture: true 确保优先于 VitePress 的 bubble 阶段 click
