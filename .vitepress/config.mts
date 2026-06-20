@@ -34,7 +34,13 @@ export default defineConfig({
             text: "行政管理",
             link: "/admin/expense/",
           },
-          { text: "IT环境", link: "/it-env/network/" },
+          {
+            text: "IT环境",
+            items: [
+              { text: "网络环境", link: "/it-env/network/" },
+              { text: "系统部署", link: "/it-env/sys-deploy/" },
+            ],
+          },
         ],
         sidebar: {
           "/": [
@@ -79,7 +85,10 @@ export default defineConfig({
             {
               text: "IT环境",
               collapsed: false,
-              items: [{ text: "网络环境", link: "/it-env/network/" }],
+              items: [
+                { text: "网络环境", link: "/it-env/network/" },
+                { text: "系统部署", link: "/it-env/sys-deploy/" },
+              ],
             },
           ],
         },
@@ -186,7 +195,6 @@ export default defineConfig({
         },
       },
     },
-    
   },
 
   // ==================== Markdown 配置 ====================
