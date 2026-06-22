@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted, nextTick, provide } from 'vue'
-import { useData } from 'vitepress'
+import { ref, onMounted, onUnmounted, nextTick, provide, watch } from 'vue'
+import { useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import ImagePreview from './components/ImagePreview.vue'
 import ColorThemeSwitcher from './components/ColorThemeSwitcher.vue'
@@ -26,6 +26,7 @@ import { KEY, type ImageViewerAPI } from './composables/useImageViewer'
 import { useAnchorScrollFix } from './composables/useAnchorScrollFix'
 
 const { isDark } = useData()
+const route = useRoute()
 const previewRef = ref<InstanceType<typeof ImagePreview> | null>(null)
 
 // 通过 provide 暴露图片预览 API，后代组件（ImageViewer 等）可通过 useImageViewer() 调用
@@ -97,6 +98,106 @@ function bindImages(container: HTMLElement) {
 
 let observer: MutationObserver | null = null
 let vtObserver: MutationObserver | null = null
+/** 专用于监听密码保护页面内容揭示后重建目录 */
+let outlineObserver: MutationObserver | null = null
+
+/**
+ * 修复 VitePress v2 alpha 右侧目录栏（Outline）hydration 后空白的问题。
+ * 直接从 DOM 标题构建目录树，注入到 VPDocOutlineItem 容器中。
+ *
+ * 调用时机：
+ * 1. 页面首次加载（onMounted）
+ * 2. SPA 路由切换（watch route.path）
+ * 3. 密码保护页面解锁后内容揭示（MutationObserver）
+ */
+function fixOutline() {
+  nextTick(() => {
+    requestAnimationFrame(() => {
+      const outlineContainer = document.querySelector('.VPDocAsideOutline')
+      if (!outlineContainer) return
+
+      const outlineRoot = outlineContainer.querySelector<HTMLUListElement>('.VPDocOutlineItem.root')
+      if (!outlineRoot) return
+
+      // 如果已有内容，说明 VitePress 正常渲染了，无需修复
+      if (outlineRoot.children.length > 0) return
+
+      // 从 .VPDoc 中读取所有标题（与 VitePress 内部 getHeaders 行为一致）
+      const headingEls = document.querySelectorAll('.VPDoc h2, .VPDoc h3, .VPDoc h4, .VPDoc h5, .VPDoc h6')
+      const headings: Array<{ title: string; link: string; level: number }> = []
+
+      headingEls.forEach((el) => {
+        const h = el as HTMLHeadingElement
+        if (!h.id || !h.hasChildNodes()) return
+
+        // 序列化标题文本（去除 permalink 等内部元素）
+        let title = ''
+        for (const node of h.childNodes) {
+          if (node.nodeType === 3) {
+            title += node.textContent
+          } else if (node.nodeType === 1) {
+            const child = node as HTMLElement
+            if (/\b(?:header-anchor|VPBadge|ignore-header)\b/.test(child.className)) continue
+            title += child.textContent
+          }
+        }
+
+        headings.push({
+          title: title.trim(),
+          link: `#${h.id}`,
+          level: Number(h.tagName[1])
+        })
+      })
+
+      if (headings.length === 0) return
+
+      // 构建嵌套的树形目录（h2 为顶层，h3/h4 嵌套在上一个父级下）
+      function buildTree(items: typeof headings, startLevel: number): HTMLUListElement {
+        const ul = document.createElement('ul')
+        ul.className = 'VPDocOutlineItem nested'
+
+        let i = 0
+        while (i < items.length) {
+          const item = items[i]
+
+          if (item.level < startLevel) { i++; continue }
+
+          // 遇到更深层级：收集连续子项，递归构建子树
+          if (item.level > startLevel) {
+            let j = i
+            while (j < items.length && items[j].level > startLevel) j++
+            const subItems = items.slice(i, j)
+            if (subItems.length > 0 && ul.lastElementChild) {
+              ul.lastElementChild.appendChild(buildTree(subItems, startLevel + 1))
+            }
+            i = j
+            continue
+          }
+
+          // 当前层级：创建列表项
+          const li = document.createElement('li')
+          const a = document.createElement('a')
+          a.className = 'outline-link'
+          a.href = item.link
+          a.title = item.title
+          a.textContent = item.title
+          li.appendChild(a)
+          ul.appendChild(li)
+          i++
+        }
+        return ul
+      }
+
+      outlineRoot.innerHTML = ''
+      const tree = buildTree(headings, 2)
+      while (tree.firstChild) {
+        outlineRoot.appendChild(tree.firstChild)
+      }
+
+      outlineContainer.classList.add('has-outline')
+    })
+  })
+}
 
 /**
  * 圆形扩散/收缩主题切换（Vben 风格）
@@ -179,6 +280,18 @@ onMounted(() => {
     document.documentElement.classList.add('theme-transition-ready')
   })
 
+  // 尝试重建右侧目录栏（处理 VitePress v2 alpha hydration 导致目录空白）
+  fixOutline()
+
+  // 专用于密码保护页面：监听 .VPDoc 中标题元素的出现，内容揭示后自动重建目录
+  outlineObserver = new MutationObserver(() => {
+    fixOutline()
+  })
+  outlineObserver.observe(document.body, {
+    childList: true,
+    subtree: true
+  })
+
   nextTick(() => {
     bindImages(document.body)
   })
@@ -199,8 +312,14 @@ onMounted(() => {
   })
 })
 
+// SPA 路由切换时重新构建目录栏
+watch(() => route.path, () => {
+  fixOutline()
+})
+
 onUnmounted(() => {
   vtObserver?.disconnect()
   observer?.disconnect()
+  outlineObserver?.disconnect()
 })
 </script>

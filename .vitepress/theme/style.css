@@ -228,3 +228,11 @@ html.vt-running *::after {
   --docsearch-primary-color: var(--vp-c-brand-1) !important;
 }
 
+/* ========== 修复右侧目录栏在 960px~1280px 区间不显示的问题 ========== */
+/* VitePress v2 alpha 默认 1280px 才显示 .aside，降低到 960px 与左侧边栏一致 */
+@media (min-width: 960px) {
+  .VPDoc .aside {
+    display: block !important;
+  }
+}
+
