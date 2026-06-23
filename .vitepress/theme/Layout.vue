@@ -98,17 +98,17 @@ function bindImages(container: HTMLElement) {
 
 let observer: MutationObserver | null = null
 let vtObserver: MutationObserver | null = null
-/** 专用于监听密码保护页面内容揭示后重建目录 */
-let outlineObserver: MutationObserver | null = null
 
 /**
  * 修复 VitePress v2 alpha 右侧目录栏（Outline）hydration 后空白的问题。
- * 直接从 DOM 标题构建目录树，注入到 VPDocOutlineItem 容器中。
+ * 直接从 DOM 标题构建树形目录，注入到 VPDocOutlineItem 容器中。
  *
  * 调用时机：
  * 1. 页面首次加载（onMounted）
  * 2. SPA 路由切换（watch route.path）
- * 3. 密码保护页面解锁后内容揭示（MutationObserver）
+ *
+ * 注：密码保护页面通过 PasswordProtected 组件验证后强制刷新来解决，
+ *     无需在此处通过 MutationObserver 监听内容揭示。
  */
 function fixOutline() {
   nextTick(() => {
@@ -283,15 +283,6 @@ onMounted(() => {
   // 尝试重建右侧目录栏（处理 VitePress v2 alpha hydration 导致目录空白）
   fixOutline()
 
-  // 专用于密码保护页面：监听 .VPDoc 中标题元素的出现，内容揭示后自动重建目录
-  outlineObserver = new MutationObserver(() => {
-    fixOutline()
-  })
-  outlineObserver.observe(document.body, {
-    childList: true,
-    subtree: true
-  })
-
   nextTick(() => {
     bindImages(document.body)
   })
@@ -320,6 +311,5 @@ watch(() => route.path, () => {
 onUnmounted(() => {
   vtObserver?.disconnect()
   observer?.disconnect()
-  outlineObserver?.disconnect()
 })
 </script>

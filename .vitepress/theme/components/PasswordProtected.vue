@@ -48,9 +48,11 @@ async function verifyPassword(input: string) {
     const hashHex = await hashPassword(input)
 
     if (hashHex === frontmatter.value.password) {
-      unlockedRef.value = true
+      // 密码正确：持久化解锁状态后强制刷新页面。
+      // 刷新后 sessionStorage 已设置，PasswordProtected 初始化时自动解锁，
+      // 内容由 SSR 渲染，右侧目录栏可正常显示。
       sessionStorage.setItem(SESSION_KEY, '1')
-      errorRef.value = false
+      location.reload()
     } else {
       errorRef.value = true
     }
