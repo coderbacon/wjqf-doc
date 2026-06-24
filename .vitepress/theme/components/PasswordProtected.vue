@@ -9,7 +9,7 @@
  * ---
  * <PasswordProtected>内容</PasswordProtected>
  */
-import { ref } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { useData } from 'vitepress'
 import { sha256 } from '../utils/sha256'
 
@@ -18,6 +18,7 @@ const SESSION_KEY = 'doc-pass-unlocked'
 const { frontmatter } = useData()
 
 const passwordRef = ref('')
+const inputRef = ref<HTMLInputElement | null>(null)
 const errorRef = ref(false)
 const unlockedRef = ref(false)
 
@@ -25,6 +26,15 @@ const unlockedRef = ref(false)
 if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem(SESSION_KEY)) {
   unlockedRef.value = true
 }
+
+// SPA 路由切换时 autofocus 属性不生效，用 onMounted 程序化聚焦
+onMounted(() => {
+  if (!unlockedRef.value) {
+    nextTick(() => {
+      inputRef.value?.focus()
+    })
+  }
+})
 
 /**
  * 计算 SHA-256 哈希
@@ -75,11 +85,11 @@ function handleSubmit(e: Event) {
       <p>请输入密码以查看内容</p>
       <div class="pass-protect__input-row">
         <input
+          ref="inputRef"
           v-model="passwordRef"
           type="password"
           placeholder="请输入密码"
           class="pass-protect__input"
-          autofocus
         />
         <button type="submit" class="pass-protect__btn">确认</button>
       </div>
