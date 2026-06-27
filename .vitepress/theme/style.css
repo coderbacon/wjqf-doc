@@ -13,6 +13,21 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ========== 全局文档站背景图片 ========== */
+body {
+  background: url('/background.jpg') center / cover no-repeat fixed;
+}
+
+/* 内容区域改为半透明，让背景图透出 */
+.VPContent {
+  background-color: color-mix(in srgb, var(--vp-c-bg) 92%, transparent) !important;
+}
+
+/* 首页 hero 区域也适当半透明 */
+.VPHero {
+  background-color: color-mix(in srgb, var(--vp-c-bg) 85%, transparent) !important;
+}
+
 /* ========== 明暗主题切换过渡动画 ========== */
 
 /* 初始化阶段禁用所有过渡（防止页面加载闪烁） */
