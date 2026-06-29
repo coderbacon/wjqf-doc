@@ -32,7 +32,10 @@ export default defineConfig({
           },
           {
             text: "行政管理",
-            link: "/admin/expense/",
+            items: [
+              { text: "采购流程", link: "/admin/procurement/" },
+              { text: "费用报销", link: "/admin/expense/" },
+            ],
           },
           {
             text: "IT环境",
@@ -74,10 +77,8 @@ export default defineConfig({
               text: "行政管理",
               collapsed: false,
               items: [
-                {
-                  text: "费用报销",
-                  link: "/admin/expense/",
-                },
+                { text: "采购流程", link: "/admin/procurement/" },
+                { text: "费用报销", link: "/admin/expense/" },
               ],
             },
           ],
